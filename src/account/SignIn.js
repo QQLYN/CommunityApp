@@ -14,14 +14,14 @@ export default function SignIn() {
     const [text, setText] = useState("");
     const finalUrl = url + 'Member';
 
-   //只要到貼文詳細頁面就重新render頁面
-   React.useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => {
-        setText("");
-    });
-    //類似停止監聽
-    return unsubscribe;
-}, [navigation]);
+    //只要到貼文詳細頁面就重新render頁面
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            setText("");
+        });
+        //類似停止監聽
+        return unsubscribe;
+    }, [navigation]);
 
     async function getData() {
         const result = await axios.get(finalUrl, axios_config);
@@ -54,10 +54,9 @@ export default function SignIn() {
 
     useEffect(() => { getData() }, [text])
 
-    function PassUserIdToHome(id, MemberInfo, Name) {
-        navigation.navigate('AfterLogIn', { userID: id, MID: MemberInfo, Name: Name });
+    function PassUserIdToHome(id, MemberInfo) {
+        navigation.navigate('AfterLogIn', { userID: id, MID: MemberInfo });
     }
-
 
     return (
         <Container>
@@ -87,5 +86,4 @@ export default function SignIn() {
             </View>
         </Container>
     )
-
 }

@@ -1,31 +1,24 @@
-import Icon from 'react-native-vector-icons/Ionicons';  
-import React, { useState, Component, useEffect } from 'react';
-import { FlatList , View , Text , Button , Image} from 'react-native';
-import { Container, Content, Card, CardItem, Left, Right, Body, Thumbnail, Fab, Textarea } from 'native-base';
+import React, { useState, useEffect } from 'react';
+import { FlatList, View, Text, Button, Image } from 'react-native';
+import { Container, Card, CardItem, Body } from 'native-base';
 import styles from '../styles';
 import axios from 'axios';
-import {axios_config, url} from '../Config';
+import { axios_config, url } from '../Config';
 
 export default function ReservationInfo({ route, navigation }) {
     const getInfoUrl = url + 'facility?filterByFormula=FacilityID+%3D+' + route.params.FacilityID;
-
     const [info, setInfo] = useState([]);
 
     const renderItem = ({ item }) => (
         <Card>
-            <CardItem bordered style={{backgroundColor: "#ACD6FF"}}>
+            <CardItem bordered style={{ backgroundColor: "#ACD6FF" }}>
                 <Body>
-                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                        <Image 
-                            source={{
-                                uri : item.fields.Picture[0].url
-                            }}
-                            style={{
-                                width: 350 ,
-                                height: 250 ,
-                            }}
+                    <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                        <Image
+                            source={{ uri: item.fields.Picture[0].url }}
+                            style={{ width: 350, height: 250 }}
                         />
-                        
+
                     </View>
                 </Body>
             </CardItem>
@@ -46,15 +39,15 @@ export default function ReservationInfo({ route, navigation }) {
                 </Body>
             </CardItem>
             <CardItem>
-                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-                    <Button 
+                <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <Button
                         style={{
-                            flex: 1 ,
+                            flex: 1,
                             justifyContent: 'center',
                             alignItems: 'center'
                         }}
                         title="我要預約"
-                        onPress={() => GoToReservationCheck(item.fields.FacilityID , item.id)}
+                        onPress={() => GoToReservationCheck(item.fields.FacilityID, item.id)}
                     />
                 </View>
             </CardItem>
@@ -75,19 +68,17 @@ export default function ReservationInfo({ route, navigation }) {
         fetchInfo();
     }, []);
 
-    function GoToReservationCheck(id , longId) {
-        navigation.navigate('ReservationCheck', { FacilityID : id , Id: longId});
+    function GoToReservationCheck(id, longId) {
+        navigation.navigate('ReservationCheck', { FacilityID: id, Id: longId });
     }
 
     return (
-      
         <Container style={styles.container}>
-            <FlatList
-                style={styles.item}
+            <FlatList style={styles.item}
                 data={info}
                 renderItem={renderItem}
                 keyExtractor={item => item.fields.FacilityID}
-            /> 
+            />
         </Container>
     );
 }

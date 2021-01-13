@@ -1,14 +1,7 @@
 
-import React, { useState, Component, useEffect } from 'react';
-import { FlatList , View , Text, Modal } from 'react-native';
-import { Container , Header , Left , Body , Segment , Button , Title , Content , Icon} from 'native-base';
+import React from 'react';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
-import styles from '../styles';
-// import AddPost from '../AddPost';
-import axios from 'axios';
-import Moment from 'moment';
-import {axios_config, url} from '../Config';
 import Reservation from './Reservation';
 import ReservationRecord from './ReservationRecord';
 
@@ -23,8 +16,7 @@ function ReservationScreen() {
     );
   }
   
-  function ReservationRecordScreen({route}) {
-    console.log(route)
+  function ReservationRecordScreen({ route }) {
     return (
     <Stack.Navigator>
         <Stack.Screen name="ReservationRecord" component={ReservationRecord} options={{headerMode: 'none', headerShown : false}} initialParams={{ LoginID: route.params.UserID }} />
@@ -35,8 +27,8 @@ function ReservationScreen() {
 export default function ReservationHome({route}) {
     return (
         <Tab.Navigator
-        screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color, size }) => {
+        screenOptions={({ }) => ({
+            tabBarIcon: ({ color, size }) => {
               let iconName;
   
               // if (route.name === 'PackageNotReceived') {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Text, TouchableOpacity, View, Image, TextInput, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { Container, Content, Card, CardItem, Left, Right, Body, Icon, Thumbnail, List, ListItem, Item, Input, Button } from 'native-base';
+import { Text, TouchableOpacity, View, TextInput, KeyboardAvoidingView, Alert } from 'react-native';
+import { Container, Card, CardItem, Left, Right, Body, Icon, Thumbnail, ListItem, Button } from 'native-base';
 import styles from '../styles';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import OptionsMenu from 'react-native-option-menu';

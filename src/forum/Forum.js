@@ -1,7 +1,7 @@
 
-import React, { useState, Component, useEffect } from 'react';
-import { FlatList, View, Text, Button, Modal } from 'react-native';
-import { Container, Content, Card, CardItem, Left, Right, Body, Icon, Thumbnail, Fab } from 'native-base';
+import React, { useState } from 'react';
+import { FlatList, View, Text } from 'react-native';
+import { Container, Card, CardItem, Left, Right, Body, Icon, Thumbnail, Fab } from 'native-base';
 import styles from '../styles';
 import axios from 'axios';
 import Moment from 'moment';

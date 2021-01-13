@@ -1,38 +1,23 @@
-import Icon from 'react-native-vector-icons/Ionicons';
-import React, { useState, Component, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FlatList, View, Text, Button } from 'react-native';
-import { Container, Content, Card, CardItem, Left, Right, Body, Thumbnail, Fab } from 'native-base';
+import { Container, Card, CardItem, Left, Right, Body } from 'native-base';
 import styles from '../styles';
-import Modal, {
-    ModalTitle,
-    ModalContent,
-    ModalFooter,
-    ModalButton,
-    SlideAnimation,
-    ScaleAnimation,
-    BottomModal,
-    ModalPortal,
-} from 'react-native-modals';
 import axios from 'axios';
 import Moment from 'moment';
 import { axios_config, url } from '../Config';
-import { BaseRouter } from '@react-navigation/native';
 
 
 export default function PackageNotReceived({ route }) {
     const loginID = route.params.Package3ID;
 
     //辨別登入者身份
-
     const finalUrl = url + 'tbl1OVTLhLIvUk3iZ?filterByFormula=AND(PackageStatus%3D0%2CMemberID%3D' + loginID + ')&maxRecords=30&sort%5B0%5D%5Bfield%5D=PackageStatus&sort%5B0%5D%5Bdirection%5D=desc';
-
     const [packageData, setPackageData] = useState([]);
-    const [modalVisible, setModalVisible] = useState(false);
+    const [] = useState(false);
 
     const renderItem = ({ item }) => (
         <Card>
             <CardItem bordered>
-
                 <Body>
                     <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                         <Left style={{ maxWidth: '20%' }}>
@@ -45,7 +30,6 @@ export default function PackageNotReceived({ route }) {
                         </Right>
                     </View>
                 </Body>
-
             </CardItem>
 
             <CardItem header bordered >
@@ -72,7 +56,6 @@ export default function PackageNotReceived({ route }) {
 
     async function fetchData() {
         const result = await axios.get(finalUrl, axios_config);
-        console.log(result);
         setPackageData(result.data.records);
     }
 
@@ -99,20 +82,14 @@ export default function PackageNotReceived({ route }) {
             color = "#ff4500";
         }
         return color;
-
     }
 
-
     return (
-
         <Container style={styles.packagecontainer}>
-
             <FlatList style={styles.item}
                 data={packageData}
                 renderItem={renderItem}
             />
-
-
         </Container>
     );
 }

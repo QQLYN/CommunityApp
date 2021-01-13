@@ -7,16 +7,7 @@ import { axios_config, url } from '../Config';
 import { Container } from 'native-base';
 
 export default function SignUp() {
-
   const navigation = useNavigation();
-
-  // React.useLayoutEffect(() => {
-  //   navigation.setOptions({
-  //     headerBackTitleVisible: false,
-  //     headerBackImage: () => <Image source={require('../image/empty.png')} />,
-  //   });
-  // }, [navigation]);
-
   const [ID, setID] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
@@ -27,26 +18,23 @@ export default function SignUp() {
   const finalUrl = url + 'Member';
 
   const addMember = async () => {
-    try {
-      const newPerson = {
-        fields: {
-          ID: ID,
-          Name: displayName,
-          Phone: phone,
-          Email: email,
-          Password: password
-        }
+    const newPerson = {
+      fields: {
+        ID: ID,
+        Name: displayName,
+        Phone: phone,
+        Email: email,
+        Password: password
       }
-
-      if (ID == '' || displayName == '' || phone == '' || email == '' || password == '') {
-        Alert.alert("", "內容不得為空！");
-        return;
     }
 
-      console.log('newPerson', newPerson)
-      const result = await axios.post(finalUrl, newPerson, axios_config);
+    if (ID == '' || displayName == '' || phone == '' || email == '' || password == '') {
+      Alert.alert("", "內容不得為空！");
+      return;
+    }
 
-      console.log('result', result);
+    try {
+      await axios.post(finalUrl, newPerson, axios_config);
       setMessage('註冊成功，請前往登入');
       setConfrim(true);
     }
@@ -60,10 +48,7 @@ export default function SignUp() {
     navigation.navigate('SignIn')
   }
 
-
-
   return (
-   
     <Container>
       <View style={styles.form}>
         <Pressable onPress={Keyboard.dismiss} style={{ flex: 1, justifyContent: 'center' }}>
@@ -102,19 +87,17 @@ export default function SignUp() {
             onChangeText={text => setPassword(text)}
             maxLength={15}
             secureTextEntry={true}
-          /> 
+          />
 
           <Button
             onPress={addMember}
             title="註冊"
           />
 
-
           <Modal transparent={true} visible={confrim}>
             <View style={style.modalView}>
               <Text>{message}</Text>
-              <Button title='前往登入' onPress={() => Close()}>
-              </Button>
+              <Button title='前往登入' onPress={() => Close()}></Button>
             </View>
           </Modal>
           <Button onPress={() => navigation.goBack()} title='已經註冊，我要登入'></Button>

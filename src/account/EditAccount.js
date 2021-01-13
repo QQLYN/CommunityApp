@@ -1,30 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Button, TextInput, Text, View, Pressable, Keyboard, Image } from 'react-native';
 import styles from './SignUpStyles';
-import styless from '../styles'
 import axios from 'axios';
 import { axios_config, url } from '../Config';
 import { Container } from 'native-base';
 
-
-
 export default function EditAccount({ route, navigation }) {
-
-    const UserID = route.params;
     const [ID, setID] = useState(route.params.UserInfo.ID);
     const [name, setName] = useState(route.params.UserInfo.Name);
     const [email, setEmail] = useState(route.params.UserInfo.Email);
     const [phone, setPhone] = useState(route.params.UserInfo.Phone);
     const [password, setPassword] = useState(route.params.UserInfo.Password);
     const finalUrl = url + 'Member';
-
-    React.useLayoutEffect(() => {
-        navigation.setOptions({
-            headerBackTitleVisible: false,
-            headerBackImage: () => <Image style={styless.backImage} source={require('../image/cross.png')} />,
-        });
-    }, [navigation]);
-
 
     useEffect(() => {
         navigation.setOptions({
@@ -33,9 +20,6 @@ export default function EditAccount({ route, navigation }) {
             ),
         });
     }, [phone, ID, name, email, password])
-
-    //console.log(route.params.UserInfo)
-    console.log(route.params.id)
 
     async function DoModify() {
         const editInfo = {
@@ -48,7 +32,6 @@ export default function EditAccount({ route, navigation }) {
                     Password: password
                 },
                 id: route.params.id
-                
             }]
         }
 
@@ -66,7 +49,6 @@ export default function EditAccount({ route, navigation }) {
         }
     }
 
-    
     return (
         <Container>
             <View style={styles.form}>
@@ -74,7 +56,7 @@ export default function EditAccount({ route, navigation }) {
 
                     <View style={styles.inputStyle}>
                         <Text style={styles.titlestyle}>使用者帳號：(不得更改)</Text>
-                        <Text style={{marginBottom: 4,}}>{ID}</Text>
+                        <Text style={{ marginBottom: 4, }}>{ID}</Text>
                     </View>
 
                     <Text style={styles.titlestyle}>姓名：</Text>
@@ -99,11 +81,10 @@ export default function EditAccount({ route, navigation }) {
                     <TextInput style={styles.inputStyle}
                         onChangeText={text => setPassword(text)}
                         value={password}
-                        
+
                     />
                 </Pressable>
             </View>
         </Container>
     )
-
 }

@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { Container, Content, Card, CardItem, Left, Right, Body, Thumbnail, Fab } from 'native-base';
+import { Container, Card, CardItem, Left, Body } from 'native-base';
 import { axios_config, url } from '../Config';
 import styles from '../styles';
 import axios from 'axios';
 
 export default function ReservationRecord({ route , navigation }) {
     const [reservationRecord, setReservationRecord] = useState([]);
-    //到時候這裡要接登入者的身分，去抓該登入者的預約紀錄來顯示
-    
     const loginID = route.params.LoginID;
-    console.log(route)
     const finalUrl = url + 'ReservationRecord?filterByFormula=MemberID%3D' + loginID +'&sort%5B0%5D%5Bfield%5D=ReservationDate&sort%5B0%5D%5Bdirection%5D=desc';
 
     React.useEffect(() => {
@@ -21,7 +18,6 @@ export default function ReservationRecord({ route , navigation }) {
         //類似停止監聽
         return unsubscribe;
     }, [navigation]);
-
 
     const renderItem = ({ item }) => (
         <Card>
@@ -51,7 +47,6 @@ export default function ReservationRecord({ route , navigation }) {
         try {
             const result = await axios.get(finalUrl, axios_config);
             setReservationRecord(result.data.records);
-            console.log(result.data)
         }
         catch(e) {
             console.log(e);
