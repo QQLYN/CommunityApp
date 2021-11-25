@@ -9,7 +9,8 @@ To run the app,<br>
 Try it and create your own app!
 
 If you occur "unsupported SDK version" message when you execuate codes via Expo Go app,<br>
-enter "expo upgrade" in terminal and your problem will be fixed!
+enter "expo upgrade" and then enter "y" in terminal.<br>
+Your problem will be fixed!
 
 #ReactNative
 #Airtable
